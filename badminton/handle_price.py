@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 price_list = []
 
-cells_list = load_pkl('cells.pkl')
+cells_list = load_pkl('./Data/cells.pkl')
 
 if __name__ == '__main__':
     for i in track(range(len(cells_list)), description="Processing..."):

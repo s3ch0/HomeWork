@@ -9,11 +9,10 @@ THE_DETAIL_URL_TEMPLATE = "https://www.badmintoncn.com/cbo_eq/view_specs_{}.html
 
 CONST_XPATH_VALUE = {
     'MAIN_TOPBAR_LINK':
-        "//div[@class='list2']/table/tbody/tr/td/a",  # the badminton species link
+    "//div[@class='list2']/table/tbody/tr/td/a", # the badminton species link
     'PAGE_CELL':
-        "//div[@class='main']/div[@class='dleft']/div[@class='list']/table/tbody/tr",
-    'CELL_LINK':
-        "//div[@class='dleft']/div/table/tbody/tr/td/a[1]",
+    "//div[@class='main']/div[@class='dleft']/div[@class='list']/table/tbody/tr",
+    'CELL_LINK': "//div[@class='dleft']/div/table/tbody/tr/td/a[1]",
     'CELL_DETAIL_LINK': "//ul[@class='view_menu']/li/a",
     'PAGES': "//div[@class='p_bar']/a[@class='p_pages']",
     'DETAIL_STAR': "//div[@class='div_5']/table/tbody/tr/td/a",
@@ -21,10 +20,15 @@ CONST_XPATH_VALUE = {
 }
 # 评分，姓名，描述，品牌，类型，fuck,链接
 Cell = namedtuple(
-    'Cell', ['grade', 'name', 'description', 'brand', 'species', 'other', 'link'])
+    'Cell',
+    ['grade', 'name', 'description', 'brand', 'species', 'other', 'link'])
+
 # 参数，图库，比较，开箱测评，使用球星，评价，入手价，那儿买
 Price = namedtuple('Price', ['price', 'second_price', 'buy_people_num'])
-Racket = namedtuple('Racket', ['name', 'grade', 'description', 'brand', 'species', 'other', 'link'])
+
+Racket = namedtuple(
+    'Racket',
+    ['name', 'grade', 'description', 'brand', 'species', 'other', 'link'])
 
 
 def load_pkl(pkl_file_path: str) -> List[Union[Cell, Price]]:

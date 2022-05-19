@@ -1,8 +1,8 @@
 from __const import *
 from luck import excel
 
-cells_list = load_pkl('./cells.pkl')
-price_list = load_pkl('./price.pkl')
+cells_list = load_pkl('./Data/cells.pkl')
+price_list = load_pkl('./Data/price.pkl')
 if __name__ == '__main__':
     title = [
         'grade', 'name', 'description', 'brand', 'species', 'other', 'link',

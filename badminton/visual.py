@@ -2,7 +2,7 @@ from luck import analyse
 from luck.plot import BarChart, PieChart
 
 if __name__ == '__main__':
-    data_file = analyse.File('./result.xlsx')
+    data_file = analyse.File('./Data/result.xlsx')
 
     brand_data = data_file.count('brand')
     species_data = data_file.count('species')
