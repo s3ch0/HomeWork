@@ -1,0 +1,27 @@
+.workspace {
+    position: absolute;
+    left: 280px;
+}
+
+.workspace > div {
+    padding: 15px;
+    margin-top: 30px;
+    margin-left: 35px;
+    float: left;
+    width: 880px;
+    height: 350px;
+    border: 1px solid white;
+    /* background-color: black; */
+    border-radius: 5px;
+}
+
+.workspace>.pie_chart{
+    padding: 15px;
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left;
+    width: 450px;
+    height: 350px;
+    border: 1px solid white;
+}
+

@@ -13,19 +13,22 @@ CORS(app, supports_credentials=True)
 
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    return redirect('./static/index.html')
 
 
 @app.route('/api/species_data')
 def species_data():
     conn = mysql_connection()
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT * FROM species")
-            result = cursor.fetchall()
-            return jsonify(result)
-    except pymysql.MySQLError() as err:
-        APP_LOG.error(err)
+    with conn.cursor() as cursor:
+        cursor.execute(
+            "select species,count(*) as num from cell group by species;")
+    tmp = cursor.fetchall()
+    species_data_dict = {i[0]: i[1] for i in tmp}
+    return {
+        'species': list(species_data_dict.keys()),
+        'numbers': list(species_data_dict.values())
+    }
 
-    finally:
-        conn.close()
+
+if __name__ == '__main__':
+    app.run(debug=True)

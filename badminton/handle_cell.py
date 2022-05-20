@@ -1,4 +1,3 @@
-from selenium import webdriver
 import pickle
 from selenium.webdriver.common.by import By
 from collections import namedtuple
@@ -8,7 +7,6 @@ from luck.__base import is_number
 from luck.excel import *
 
 HANDLE_LOG = Log()
-
 cells = []
 detail = []
 
@@ -41,13 +39,8 @@ def cell_process(cell_string: str, the_link) -> Cell:
 
 if __name__ == '__main__':
     cells_list = []
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    # hide the browser
-    chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_argument('--no-sandbox')
     url = THE_ENTRY_POINT
-    chrome = webdriver.Chrome(chrome_options=chrome_options)
+    chrome = init_chrome()
     # use the option to set the headless mode
     chrome.get(url)
     chrome.implicitly_wait(10)

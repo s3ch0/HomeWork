@@ -1,0 +1,188 @@
+from flask import Flask, redirect, url_for
+# from pymysql import *
+from flask_cors import CORS
+from utils import *
+import setting
+
+app = Flask(__name__)
+app.config.from_object(setting)
+CORS(app)
+
+
+@app.route('/')
+def index():
+    return redirect("static/index.html")
+
+
+@app.route('/api/general_data')
+def generally_data():
+    conn = get_mysql_connection()
+    try:
+        with conn.cursor() as cursor:
+            # gain the orders number
+            cursor.execute("select  count(*) from tb_orders;")
+            order_num = cursor.fetchone()
+            # gain the sellers number
+            cursor.execute("select count(*) from tb_sellers;")
+            sellers_num = cursor.fetchone()
+            # gain the products number
+            cursor.execute("select count(*) from tb_products;")
+            products_num = cursor.fetchone()
+            return {
+                'orders': order_num[0],
+                'sellers': sellers_num[0],
+                'products': products_num[0]
+            }
+
+    except pymysql.MySQLError() as err:
+        print(err)
+
+    finally:
+        conn.close()
+
+
+@app.route('/api/range_city_data')
+def gen_range_city_data():
+    conn = get_mysql_connection()
+    try:
+        with conn.cursor() as cursor:
+            # gain the city ranger (desc)
+            cursor.execute(
+                "select customer_city ,count(*) as num from tb_customers group by customer_city order by (num) desc limit 10;"
+            )
+            tmp = cursor.fetchall()
+            customer_city_range_dict = {i[0]: i[1] for i in tmp}
+            return {
+                'city': list(customer_city_range_dict.keys()),
+                'numbers': list(customer_city_range_dict.values())
+            }
+    except pymysql.MySQLError() as err:
+        print(err)
+
+    finally:
+        conn.close()
+
+
+# gain the state ranger (desc)
+@app.route('/api/range_state_data')
+def gen_range_state_data():
+    conn = get_mysql_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "select customer_state ,count(*) as num from tb_customers group by (customer_state) order by (num) desc limit 9;"
+            )
+
+            tmp = cursor.fetchall()
+            customer_state_range_dict = {i[0]: i[1] for i in tmp}
+            customer_state_range_list = [{
+                'value': v,
+                'name': k
+            } for k, v in customer_state_range_dict.items()]
+
+            return {'data_pie': customer_state_range_list}
+
+    except pymysql.MySQLError() as err:
+        print(err)
+
+    finally:
+        conn.close()
+
+
+@app.route('/api/week_orders')
+def gen_week_orders():
+    conn = get_mysql_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "select count(*) as num ,dayname(order_purchase_timestamp) as myweek from tb_orders group by (myweek) order by num desc;"
+            )
+            tmp = cursor.fetchall()
+            week_orders_dict = {i[1]: i[0] for i in tmp}
+            week_orders_list = [{
+                'value': v,
+                'name': k
+            } for k, v in week_orders_dict.items()]
+            return {'data_pie': week_orders_list}
+
+    except pymysql.MySQLError() as err:
+        print(err)
+
+    finally:
+        conn.close()
+
+
+@app.route('/api/year_week_orders')
+def gen_year_week_orders():
+    conn = get_mysql_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "select count(*) as num,month(order_purchase_timestamp) as mytime,year(order_purchase_timestamp) as myyear from tb_orders where year(order_purchase_timestamp) in (2017,2018) group by year(order_purchase_timestamp),mytime order by(order_purchase_timestamp)"
+            )
+            tmp = cursor.fetchall()
+            year_2017_data = {
+                str(i[2]) + '-' + str(i[1]): i[0]
+                for i in tmp[0:12]
+            }
+            year_2018_data = {
+                str(i[2]) + '-' + str(i[1]): i[0]
+                for i in tmp[12:]
+            }
+            year_2017_name = list(year_2017_data.keys())
+            year_2018_name = list(year_2018_data.keys())
+            year_2018_value = list(year_2018_data.values())
+            year_2017_value = list(year_2017_data.values())
+            return {
+                'name_2017': year_2017_name,
+                'name_2018': year_2018_name,
+                'value_2017': year_2017_value,
+                'value_2018': year_2018_value
+            }
+
+    except pymysql.MySQLError() as err:
+        print(err)
+
+    finally:
+        conn.close()
+
+
+@app.route('/api/hour_orders')
+def gen_hour_orders():
+    conn = get_mysql_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(
+                "select count(*) as num ,hour(order_purchase_timestamp) as mytime from tb_orders group by(mytime);"
+            )
+            tmp = cursor.fetchall()
+            morning = 0
+            afternoon = 0
+            evening = 0
+            night = 0
+            for i in range(len(tmp)):
+                if (0 <= tmp[i][1] < 6):
+                    night += tmp[i][0]
+                elif (6 <= tmp[i][1] < 12):
+                    morning += tmp[i][0]
+                elif (12 <= tmp[i][1] < 18):
+                    afternoon += tmp[i][0]
+                elif (18 <= tmp[i][1] < 24):
+                    evening += tmp[i][0]
+            res = {
+                "morning": morning,
+                "afternoon": afternoon,
+                "evening": evening,
+                "night": night
+            }
+            return {'y_value': list(res.keys()), 'x_value': list(res.values())}
+
+    except pymysql.MySQLError() as err:
+        print(err)
+
+    finally:
+        conn.close()
+
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0")

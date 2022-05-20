@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>电商后台管理</title>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="css/sidebar-menu.css" />
+		<link rel="stylesheet" type="text/css" href="css/dmaku.css" />
+		<link rel="stylesheet" href="css/chart.css" />
+		<script src="js/echarts.min.js"></script>
+	</head>
+
+	<body>
+		<aside class="main-sidebar">
+			<section class="sidebar">
+				<ul class="sidebar-menu">
+					<li class="header">MAIN NAVIGATION</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Dashboard v1</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Dashboard v2</a>
+							</li>
+						</ul>
+					</li>
+
+					<li>
+						<a href="#">
+							<i class="fa fa-th"></i> <span>Widgets</span>
+							<small class="label pull-right label-info">new</small>
+						</a>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-pie-chart"></i>
+							<span>Charts</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="backstage.html"><i class="fa fa-circle-o"></i> Customer Info</a>
+							</li>
+							<li>
+								<a href="orders_info.html"><i class="fa fa-circle-o"></i> Orders Info</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Orders About Time</a>
+							</li>
+							<li>
+								<a href="purchase_info.html"><i class="fa fa-circle-o"></i> Purchase Info</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Categories Info</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Freight times and costs</a>
+							</li>
+						</ul>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-laptop"></i>
+							<span>UI Elements</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> General</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Icons</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Buttons</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Sliders</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Timeline</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Modals</a>
+							</li>
+						</ul>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-edit"></i> <span>Forms</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> General Elements</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Advanced Elements</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Editors</a>
+							</li>
+						</ul>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-table"></i> <span>Tables</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Simple tables</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Data tables</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-calendar"></i> <span>Calendar</span>
+							<small class="label pull-right label-danger">3</small>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-envelope"></i> <span>Mailbox</span>
+							<small class="label pull-right label-warning">12</small>
+						</a>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-folder"></i> <span>Examples</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Invoice</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Profile</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Login</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Register</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Lockscreen</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> 404 Error</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> 500 Error</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Blank Page</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Pace Page</a>
+							</li>
+						</ul>
+					</li>
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-share"></i> <span>Multilevel</span>
+							<i class="fa fa-angle-left pull-right"></i>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Level One</a>
+							</li>
+							<li>
+								<a href="#"
+									><i class="fa fa-circle-o"></i> Level One
+									<i class="fa fa-angle-left pull-right"></i
+								></a>
+								<ul class="treeview-menu">
+									<li>
+										<a href="#"><i class="fa fa-circle-o"></i> Level Two</a>
+									</li>
+									<li>
+										<a href="#"
+											><i class="fa fa-circle-o"></i> Level Two
+											<i class="fa fa-angle-left pull-right"></i
+										></a>
+										<ul class="treeview-menu">
+											<li>
+												<a href="#"><i class="fa fa-circle-o"></i> Level Three</a>
+											</li>
+											<li>
+												<a href="#"><i class="fa fa-circle-o"></i> Level Three</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-circle-o"></i> Level One</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-book"></i> <span>Documentation</span></a>
+					</li>
+					<li class="header">LABELS</li>
+					<li>
+						<a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a>
+					</li>
+				</ul>
+			</section>
+		</aside>
+
+		<div class="workspace">
+			<div id="range_species_chart"></div>
+			<div id="range_state_chart"></div>
+		</div>
+
+		<script src="js/jquery-2.1.1.min.js"></script>
+		<script src="js/sidebar-menu.js"></script>
+		<script>
+			$.sidebarMenu($(".sidebar-menu"));
+		</script>
+		<script>
+			let range_species_chart = echarts.init(document.getElementById("range_species_chart"));
+			fetch("/api/species_data")
+				.then((resp) => resp.json())
+				.then((json) => {
+					let range_species_options = {
+						title: {
+							text: "",
+							textStyle: {
+								color: "#fff",
+								fontFamily: "Consolas",
+								fontWeight: "normal",
+							},
+						},
+						visualMap: {
+							orient: "vertical",
+							left: "95%",
+							top: "30%",
+							min: 50,
+							max: 1800,
+							text: ["Hnum", "Lnum"],
+							// Map the score column to color
+							dimension: 1,
+							inRange: {
+								color: ["#65B581", "#FFCE34", "#FD665F"],
+							},
+						},
+						dataZoom: {
+							id: "dataZoomX",
+							type: "slider",
+							xAxisIndex: [0],
+							filterMode: "filter", // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+							start: 0,
+							end: 100,
+						},
+
+						toolbox: {
+							show: true,
+							feature: {
+								dataZoom: {
+									yAxisIndex: "none",
+								},
+								dataView: { readOnly: false },
+								magicType: { type: ["line", "bar"] },
+								restore: {},
+								saveAsImage: {},
+							},
+						},
+						tooltip: {},
+						legend: {
+							data: ["数量"],
+						},
+						xAxis: {
+							data: json.species,
+						},
+						yAxis: {
+							axisLine: {
+								show: true,
+							},
+							splitLine: {
+								show: false,
+							},
+						},
+						series: [
+							{
+								name: "数量",
+								type: "bar",
+								barWidth: 30,
+								data: json.numbers,
+							},
+						],
+					};
+
+					range_species_chart.setOption(range_species_options);
+				});
+
+			let range_state_chart = echarts.init(document.getElementById("range_state_chart"));
+			fetch("/api/range_state_data")
+				.then((resp) => resp.json())
+				.then((json) => {
+					let range_state_option = {
+						center: ["10%", "10%"],
+						title: {
+							text: "Top 9 states with the most clients",
+							textStyle: {
+								color: "#fff",
+								fontFamily: "Consolas",
+								fontWeight: "normal",
+							},
+						},
+
+						tooltip: {
+							trigger: "item",
+						},
+						legend: {
+							orient: "vertical",
+							top: "10%",
+							right: "15%",
+							// Left:'right'
+							// left: 'center'
+						},
+						series: [
+							{
+								name: "Access From",
+								type: "pie",
+								radius: ["35%", "70%"],
+								avoidLabelOverlap: false,
+								itemStyle: {
+									borderRadius: 10,
+									borderColor: "#fff",
+									borderWidth: 0,
+								},
+								label: {
+									show: false,
+									position: "center",
+								},
+								emphasis: {
+									label: {
+										show: true,
+										fontSize: "40",
+										fontWeight: "bold",
+									},
+								},
+								labelLine: {
+									show: false,
+								},
+								data: json.data_pie,
+							},
+						],
+					};
+
+					range_state_chart.setOption(range_state_option);
+				});
+		</script>
+	</body>
+</html>
