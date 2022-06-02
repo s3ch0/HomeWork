@@ -1,8 +1,10 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
+from multiprocessing import cpu_count
 import pickle
 from selenium import webdriver
 from typing import *
 
+CPU_COUNT = cpu_count()
 THE_ENTRY_POINT = "https://www.badmintoncn.com/cbo_eq/list.php?name=&class=0&brand=0"
 THE_PAGE_URL_TEMPLATE = "https://www.badmintoncn.com/cbo_eq/list.php?brand=0&sort=0&class=0&fee=&name=&order=last&page={}"
 THE_PRICE_URL_TEMPLATE = "https://www.badmintoncn.com/cbo_eq/view_buy.php?eid={}"
@@ -33,7 +35,7 @@ Racket = namedtuple(
     ['name', 'grade', 'description', 'brand', 'species', 'other', 'link'])
 
 
-def load_pkl(pkl_file_path: str) -> List[Union[Cell, Price]]:
+def load_pkl(pkl_file_path: str):
     if isinstance(pkl_file_path, str):
         fd = open(pkl_file_path, 'rb')
         obj_list = pickle.load(fd)
@@ -52,3 +54,12 @@ def init_chrome() -> webdriver.Chrome:
     options.add_argument('--silent')
     driver = webdriver.Chrome(chrome_options=options)
     return driver
+
+
+def split_list(lst: List[Any], n: int) -> List[List[Any]]:
+    return [lst[i:i + n] for i in range(0, len(lst), n)]
+
+
+if __name__ == '__main__':
+    list1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    print(split_list(list1, 3))

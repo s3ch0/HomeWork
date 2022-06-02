@@ -1,4 +1,5 @@
 import pymysql
+from __sqlconst import *
 from luck.__log import Log
 from flask import Flask, redirect, url_for, jsonify
 from flask_cors import CORS
@@ -20,8 +21,7 @@ def index():
 def species_data():
     conn = mysql_connection()
     with conn.cursor() as cursor:
-        cursor.execute(
-            "select species,count(*) as num from cell group by species;")
+        cursor.execute(SQL_CMD.get('species_data'))
     tmp = cursor.fetchall()
     species_data_dict = {i[0]: i[1] for i in tmp}
     return {

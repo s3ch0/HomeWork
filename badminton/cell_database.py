@@ -29,7 +29,7 @@ price_data.close()
 print(price_list)
 
 temp_sql = "insert into cell value({}, '{}', '{}', '{}', '{}', '{}', '{}', {})"
-sql_file = open("sql.txt", 'w')
+sql_file = open("cell.sql", 'w')
 
 for cell, price in zip(cells_list, price_list):
     sql_file.write(
