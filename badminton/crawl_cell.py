@@ -1,6 +1,4 @@
-import pickle
 from selenium.webdriver.common.by import By
-from collections import namedtuple
 from __const import *
 from rich.progress import track
 from luck.__base import is_number
@@ -38,6 +36,7 @@ def cell_process(cell_string: str, the_link) -> Cell:
 
 
 if __name__ == '__main__':
+    HANDLE_LOG.info("Start crawl cell...")
     cells_list = []
     url = THE_ENTRY_POINT
     chrome = init_chrome()
@@ -45,6 +44,7 @@ if __name__ == '__main__':
     chrome.get(url)
     chrome.implicitly_wait(10)
     HANDLE_LOG.process("Start to handle the entry point page")
+    # the main
     pages = chrome.find_element(By.XPATH, value=CONST_XPATH_VALUE["PAGES"])
     max_page_num = int(pages.text.split('/')[1])
     the_page_url = THE_PAGE_URL_TEMPLATE

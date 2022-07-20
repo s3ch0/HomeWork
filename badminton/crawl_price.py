@@ -1,6 +1,5 @@
 import requests
 from __const import *
-from luck.embellish import printf
 from rich.progress import track
 from luck.__log import Log
 from bs4 import BeautifulSoup

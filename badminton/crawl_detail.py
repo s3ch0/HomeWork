@@ -1,7 +1,7 @@
-'''
+"""
 This file will crawl the badminton detail infomation to detail.pkl
 INFO: the infomation use defaultdict to store the infomation
-'''
+"""
 from selenium.webdriver.chrome.webdriver import WebDriver
 from __const import *
 import pickle
@@ -16,16 +16,17 @@ price_list = load_pkl('./Data/price.pkl')
 
 if __name__ == '__main__':
     # set webdriver options
+
+    HANDLE_DETAIL_LOG.info("Start crawling...")
     driver: WebDriver = init_chrome()
     rocket = [i for i in cells_list if i.species == "羽毛球拍"]
     res_dict = defaultdict()
     url = [cell.link for cell in rocket]
     res_list = []
-    #  632
 
     HANDLE_DETAIL_LOG.info('will start crawl {} infomation'.format(len(url)))
     # 3632
-    for i in track(range(3632, 3633), description="Processing..."):
+    for i in track(range(len(url)), description="Processing..."):
         # init the dict
         res_dict = defaultdict()
         index = rocket[i].link.split('/')[-1].split('.')[0].split('_')[-1]
@@ -36,6 +37,8 @@ if __name__ == '__main__':
 
         elements_list = driver.find_elements(
             By.XPATH, CONST_XPATH_VALUE.get("DETAIL_ALL"))
+
+        # process the temp data
         for element in elements_list:
             if element.text.strip() == "":
                 continue
@@ -50,7 +53,6 @@ if __name__ == '__main__':
             else:
                 key = tmp_items[0]
                 value = tmp_items[1]
-
             res_dict[str(key)] = "".join(value).strip()
 
         res_list.append(res_dict)

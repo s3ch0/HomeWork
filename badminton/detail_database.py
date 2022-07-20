@@ -126,7 +126,6 @@ if __name__ == '__main__':
     temp_res = []
     # save to sql file
     # process main_list
-
     for index, key in enumerate(main_list):
         temp_res = []
         temp_res.append(key[head[0]])

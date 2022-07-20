@@ -9,7 +9,7 @@ DB_PASS = os.environ.get('DB_PASS') or '123.com'
 DB_NAME = os.environ.get('DB_NAME') or 'badminton'
 DB_CHAR = os.environ.get('DB_CHAR') or 'utf8mb4'
 db_config = {
-    'host': DB_HOST,
+    'host': "192.168.0.205",
     'port': DB_PORT,
     'user': DB_USER,
     'password': DB_PASS,

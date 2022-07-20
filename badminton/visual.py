@@ -8,6 +8,7 @@ if __name__ == '__main__':
     species_data = data_file.count('species')
     grade_data = data_file.count('grade')
 
+    # process raw data to display data
     display_data = dict(
         list({
             k: v

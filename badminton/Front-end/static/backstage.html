@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>电商后台管理</title>
+		<title>中羽数据分析系统</title>
 		<link
 			rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -53,22 +53,13 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="backstage.html"><i class="fa fa-circle-o"></i> Customer Info</a>
+								<a href="backstage.html"><i class="fa fa-circle-o"></i>Cell Basic Info</a>
 							</li>
 							<li>
-								<a href="orders_info.html"><i class="fa fa-circle-o"></i> Orders Info</a>
+								<a href="detail_info.html"><i class="fa fa-circle-o"></i>Detail Info</a>
 							</li>
 							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Orders About Time</a>
-							</li>
-							<li>
-								<a href="purchase_info.html"><i class="fa fa-circle-o"></i> Purchase Info</a>
-							</li>
-							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Categories Info</a>
-							</li>
-							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Freight times and costs</a>
+								<a href="#"><i class="fa fa-circle-o"></i>Orders About Time</a>
 							</li>
 						</ul>
 					</li>
@@ -149,16 +140,16 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Invoice</a>
+								<a href="./brand.html"><i class="fa fa-circle-o"></i> Brand Chart</a>
 							</li>
 							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Profile</a>
+								<a href="grade.html"><i class="fa fa-circle-o"></i> Grade Chart</a>
 							</li>
 							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Login</a>
+								<a href="species.html"><i class="fa fa-circle-o"></i> Species Chart</a>
 							</li>
 							<li>
-								<a href="#"><i class="fa fa-circle-o"></i> Register</a>
+								<a href="species_rose.html"><i class="fa fa-circle-o"></i> Species Rose Chart</a>
 							</li>
 							<li>
 								<a href="#"><i class="fa fa-circle-o"></i> Lockscreen</a>
@@ -235,16 +226,13 @@
 					<li>
 						<a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a>
 					</li>
-					<li>
-						<a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a>
-					</li>
 				</ul>
 			</section>
 		</aside>
 
 		<div class="workspace">
 			<div id="range_species_chart"></div>
-			<div id="range_state_chart"></div>
+			<div id="grade_chart"></div>
 		</div>
 
 		<script src="js/jquery-2.1.1.min.js"></script>
@@ -259,7 +247,7 @@
 				.then((json) => {
 					let range_species_options = {
 						title: {
-							text: "",
+							text: "种类数量图",
 							textStyle: {
 								color: "#fff",
 								fontFamily: "Consolas",
@@ -271,12 +259,12 @@
 							left: "95%",
 							top: "30%",
 							min: 50,
-							max: 1800,
+							max: 3600,
 							text: ["Hnum", "Lnum"],
 							// Map the score column to color
 							dimension: 1,
 							inRange: {
-								color: ["#65B581", "#FFCE34", "#FD665F"],
+								color: ["#65B581", "#FFB","#FFCE34", "#FD665F"],
 							},
 						},
 						dataZoom: {
@@ -328,14 +316,14 @@
 					range_species_chart.setOption(range_species_options);
 				});
 
-			let range_state_chart = echarts.init(document.getElementById("range_state_chart"));
-			fetch("/api/range_state_data")
+			let grade_chart= echarts.init(document.getElementById("grade_chart"));
+			fetch("/api/grade_data")
 				.then((resp) => resp.json())
 				.then((json) => {
-					let range_state_option = {
+					let grade_chart_option= {
 						center: ["10%", "10%"],
 						title: {
-							text: "Top 9 states with the most clients",
+							text: "评分数量表",
 							textStyle: {
 								color: "#fff",
 								fontFamily: "Consolas",
@@ -355,7 +343,7 @@
 						},
 						series: [
 							{
-								name: "Access From",
+								name: "评分数",
 								type: "pie",
 								radius: ["35%", "70%"],
 								avoidLabelOverlap: false,
@@ -383,7 +371,7 @@
 						],
 					};
 
-					range_state_chart.setOption(range_state_option);
+					grade_chart.setOption(grade_chart_option);
 				});
 		</script>
 	</body>
