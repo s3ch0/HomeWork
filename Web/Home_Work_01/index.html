@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 定义一些配色方案 */
+        html{
+            --second_title:#7a8a9a;
+        }
+        /* 简单清除一下默认样式 */
+        body{
+
+            border: 0px;
+            margin: 0px;
+            background-color:#f5f7f9;
+        }
+        img {
+	    display: block;
+	    width: 100%;
+    }
+
+    @keyframes snow{
+	    0% {
+		    background-position: 0 0, 0 0;
+	    }
+	    100% {
+		    background-position: 500px 500px, 1000px 500px;
+	    }
+    }
+ 
+    #snowMask {
+	    position: fixed;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: url('snow1.png'),url('snow2.png');
+	    animation: 10s snow linear infinite;
+	    pointer-events: none;
+    }
+
+
+
+        /* 标题样式  */
+        h1{
+            margin: 8px;
+            text-align: center;
+            color: rgb(235, 133, 1);
+        }
+
+        .pic
+        {
+
+            width: 220px;
+            height: 300px;
+            background-color: #cccc;
+            /* background-image: url(./me.jpg); */
+            float: left;
+            overflow:hidden;
+            /* margin: 0 10px; */
+            transition: all .3s;
+            margin-top: 25px;
+            margin-right: 38px;
+            margin-left: 40px;
+            
+        }
+        .pic>image{
+            position: absolute;
+            min-width: 100%;
+            min-height: 100%;
+            transform:translate(-50%,-50%);
+            width: 100%;
+            height: 100%;
+        }
+        .pic:hover
+        {
+            transform: translateY(-4px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+
+        }
+        .sidebar
+        {
+            margin-top: 20px;
+            font-size:30px;
+            font-family: Consolas;
+            color:#1a2a3a;
+            /* background-color: silver; */
+        }
+
+        /* 主体部分 */
+        .main{
+            padding: 10px;
+            border-radius: 8px;
+            /* margin-top: 250px; */
+            color: #2a3a4a;
+            background-color: #cccc;
+            font-size: medium;
+            font-family:'Courier New', Courier, monospace;
+            margin-bottom: 20px;
+            
+        }
+
+        .main>a{
+            text-decoration: none;
+            
+            color: steelblue;
+        }
+
+        .title_doc
+        {
+            margin-top: 30px;
+            color:var(--second_title);
+            margin-bottom: 30px;
+            font-size: x-large;
+            text-align: center;
+            
+
+
+        }
+        /* 外部容器 */
+        .doc{
+            
+            /* text-align: center; */
+            font-family:'Courier New', Courier, monospace;
+            /* box-shadow: 0 0 8rgba(0, 0, 0, .2); */
+            border-radius: 1%;
+            width: 1500px;
+            height: 450px;
+            background-color:#dddd;
+            display: block;
+            margin: auto;
+            border-style: solid;
+            border-color: #cccc;
+            overflow: hidden;
+
+
+        }
+        /* 内部字体样式 */
+        .inner_doc
+        {
+            float: left;
+            margin-left: 20px;
+            /* display: block; */
+            margin-top: 40px;
+            margin-right: 10px;
+            color:#2a3a4a;
+            
+            /* font-style:italic; */
+            /* font-family:Consolas; */
+        }
+
+        .middle{
+
+            color: var(--second_title);
+            text-align: center;
+            font-size: x-large;
+            margin-bottom: 35px;
+            margin-top: 30px;
+            /* background-color: #d5d7db; */
+        }
+        /* 各标题前的小符号 */
+        b{
+            font-size: larger;
+            color: #59c837;
+
+        }
+
+
+        .note_list
+        {
+           
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .note_list>div
+        {
+            display: flex;
+            justify-content: center;
+            flex-direction:column;
+            /* transform: translateY(-4px); */
+            align-items: center;
+            width: 200px;
+            height: 100px;
+            border-style: solid;
+            border-color: rgb(194, 168, 165);
+            border-radius: 5%;
+            border-width: 2px;
+            background-color: rgb(224, 218, 218);
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, .3); */
+            transition: all 10s;
+            /* font-size: large; */    
+        }
+        .note_list>div:hover
+        {
+            transform: translateY(-4px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+        }
+        /* 链接样式 */
+        .note_list>div>a
+        {
+            font-size: larger;
+            font-family: Consolas;
+            text-decoration: none;
+            color:rgb(95, 145, 185)
+           
+
+        }
+        span{
+            color: tomato;
+            font-size: x-large;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 标题 -->
+    <h1 class="head">
+        INTRODUCTION
+    </h1>
+
+    <!-- 个人图片 -->
+    <div class="pic">
+        <img src="./pic1.png" alt="个人图片">
+    </div>
+
+    <!-- 图像侧边 -->
+    <div class="sidebar">
+        I'm Busy To Live |
+        <br>
+        <br>
+    
+
+        
+    </div>
+
+    <!-- 主体 -->
+    <div class="main">
+        <div style="border:1px solid rgb(95, 91, 91)"></div> 
+        <br>
+        <!-- 分割线 -->
+        <!-- <div class="title" style="color: tomato;font-size:x-large;margin-bottom: 5px;">Basic Info</div> -->
+        
+        Name: ZhouHao
+        <br>
+        ID: 202039160136
+        <!-- <hr> -->
+        <br>
+
+        Gender: Man
+        <br>
+        School: XingZhi College ZheJiang Normal University
+        <br>
+        Age: 3
+        <br>
+        Code Hub: <a href="https://gitee.com/zhouhaobusy_admin">My Code Hub</a>
+        <br>
+        Clan: Jokers
+        <br>
+        My Blog: <a href="https://blog.csdn.net/cghhghffjgchg?spm=1010.2135.3001.5421">CSDN</a>
+        <br>
+        Contact Me: 17879639501
+        <br>
+        QQ: 2035834142
+        <br>
+        <br>
+        <div style="border:1px solid rgb(95, 91, 91)"></div>  
+    </div>
+    <div class="title_doc">
+     <b>|&nbsp; &nbsp;</b>   PERSONAL PROFILE <b>&nbsp; &nbsp;|</b>
+    </div>
+
+    <div class="doc">
+        <div class="inner_doc">
+            <span>Lorem</span> ipsum dolor sit amet consectetur adipisicing elit. Deserunt vero doloremque ab accusantium illo veritatis fugiat odio nobis, assumenda ratione eligendi velit repellendus cupiditate ad quidem corrupti alias reprehenderit autem?
+            <br>
+            Iste laboriosam repellat, porro quos expedita iusto ut, eaque itaque in et rerum fugit obcaecati vero recusandae aperiam, laudantium explicabo nisi eveniet.
+            <br>
+            ipsum, dolor sit amet consectetur adipisicing elit. Sunt mollitia quod, cupiditate ipsum fugiat necessitatibus laudantium vitae placeat, doloremque similique eos quidem impedit nisi, consequuntur vero quas voluptate provident veniam.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi animi excepturi veritatis dignissimos voluptas distinctio ea laboriosam? Debitis, eligendi autem fugit reprehenderit laboriosam sint, ipsum consequatur illo tempore, quia recusandae.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, dicta fuga nam ratione fugit at ad dolorem, cupiditate earum, deserunt consequuntur omnis modi blanditiis mollitia repudiandae soluta. Necessitatibus, at. Quaerat?
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci, quaerat nihil, nulla consectetur consequuntur dignissimos aut sunt, ipsam officiis enim autem at impedit? Ad nisi laudantium omnis autem veniam amet!
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia neque blanditiis commodi magnam in mollitia nulla nisi amet natus non, quasi nesciunt iusto perferendis consequuntur officiis officia! Perferendis, iusto vero!
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam sapiente accusantium, inventore, voluptate rem explicabo enim est vero sed dolorum ad debitis voluptas odio ea quas quia dolore provident voluptatum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda quisquam illum laudantium. Earum, aliquam. Sit aliquam ullam, impedit non, soluta sequi ipsam ipsa, saepe quas quisquam voluptate. Nihil, quis tempora!            
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium cupiditate nostrum, vel exercitationem molestiae maxime quisquam repudiandae impedit dolorem doloribus quae incidunt sint soluta eveniet quis sequi, provident placeat eligendi.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. In eaque, error corporis provident, doloribus mollitia architecto nam iste molestiae saepe animi quis voluptatibus quia, ipsam quasi esse quaerat deleniti consequatur?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore molestias veniam repellat adipisci, natus sit quae expedita dolorem amet dolores voluptatum atque quibusdam odit architecto est labore. Veniam, reiciendis nulla.
+
+        </div>
+        
+
+    </div>
+    
+    <div class="middle">
+       <b>|&nbsp; &nbsp;</b>MY NOTE<b>&nbsp; &nbsp;|</b>
+    </div>
+    <div class="note_list">
+        <div>
+            <a href="">C++</a>
+            
+        </div>
+        <div>
+            <a href="Python.html">Python</a>
+            
+
+        </div>
+        <div>
+            <a href="Python-Crawler.html.html">Crawler</a>
+            
+        </div>
+        <div>
+            <a href="">Linux</a>
+        </div>
+        <div>
+            <a href="Docker.html">Docker</a>
+        </div>
+        <div>
+            <a href="">MySQL</a>
+        </div>
+        <div id="snowMask"></div>
+
+
+    </div>
+
+    
+
+
+    
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./JS/vue.js"></script>
+    <link rel="stylesheet" href="./reset.css">
+    <style>
+        #main {
+            width: 75%;
+            margin: auto;
+            height: 100%;
+        }
+
+        .content {
+            font-family: Consolas;
+            padding: 20px 20px;
+            margin-top: 30px;
+            height: 300px;
+            font-size: larger;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(126, 61, 61, 0.5);
+            border-radius: 10px;
+
+        }
+
+
+        .button {
+            width: 150px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 8px;
+            border: none;
+            padding: 0px;
+            cursor: pointer;
+            font-family: Consolas;
+            transition: all .5s;
+        }
+
+        .button:hover {
+            color: red;
+            transform: translateY(-4px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+        }
+
+        #button-list {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .dark_theme {
+            background-color: #1f2430;
+            color: white;
+        }
+        .default_theme
+        {
+            background-color: #263238;
+            color: #82aaff;
+        }
+        .white_theme
+        {
+            background-color: #ddd;
+            color: #263238;
+        }
+        .foo{
+            color:cornflowerblue;
+        }
+
+
+        .theme_01 {
+
+            background-color: burlywood;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div id="main">
+        <div class="content" :class="curr_theme">
+            <p class="foo">1000以内的素数有:</p>
+            <br> 
+            <hr>
+            {{data}}
+            <hr>
+        </div>
+        <!-- <div class="button theme_01" type="button" @click="gainData">
+             Gain the data
+
+         </div> -->
+
+        <ul id="button-list">
+            <li class="item">
+                <button class="button theme_01" type="button" @click="gainData(1000)">
+                    Gain the data
+                </button>
+            </li>
+            <li class="item">
+                <button class="button theme_01" type="button" @click="change_DarkTheme">
+                    Dark Theme
+                </button>
+            </li>
+            <li class="item">
+                <button class="button theme_01" type="button" @click="change_DefaultTheme">
+                    Default Theme
+                </button>
+            </li>
+            <li class="item">
+                <button class="button theme_01" type="button" @click="change_WhiteTheme">
+                    White Theme
+
+                </button>
+            </li>
+        </ul>
+
+    </div>
+
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: "#main",
+        data: {
+            data:'',
+            data_arr: [],
+            theme: ["dark_theme", "white_theme", "default_theme"],
+            curr_theme: "dark_theme",
+
+
+        },
+        methods: {
+            gainData(len) {
+                this.data='';
+                var i, j;
+                var arr = [];
+                for (i = 1; i < len; i++) {
+                    for (j = 2; j < i; j++) {
+                        if (i % j === 0) {
+                            break;
+                        }
+                    }
+                    if (i <= j && i != 1) {
+                        arr.push(i);
+                    }
+
+                }
+                this.data_arr = arr;
+            },
+            change_DarkTheme() {
+                this.curr_theme = 'dark_theme';
+            },
+            change_WhiteTheme() {
+                this.curr_theme = 'white_theme';
+            },
+            change_DefaultTheme() {
+                this.curr_theme = 'default_theme';
+            },
+            
+
+
+        },
+        computed: {
+
+        },
+        watch: {
+            data_arr(val){
+                setTimeout(()=>{
+                    this.data = val;
+                },500);
+            }
+        },
+
+    })
+
+</script>
+
+</html>

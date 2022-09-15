@@ -1,0 +1,18 @@
+header,main,footer{
+    width: 90%;
+    margin: auto;
+}
+.clearfix::before,
+.clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 20px;
+    color: #f4f1de;
+}

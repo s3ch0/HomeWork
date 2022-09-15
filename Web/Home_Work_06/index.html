@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<title>Web HomeWork</title>
+<head>
+    <style type="text/css">
+         #root{
+             margin-top: 100px;
+             width: 600px;
+             height: auto;
+             margin: auto;
+
+        }
+       
+        .inputStyle{
+            outline-style: none;
+            margin-top: 30px;
+            width: 200px;
+            margin-right: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 6px 2px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            /*  */
+        }
+
+        
+        table.altrowstable {
+            font-family: verdana,arial,sans-serif;
+            font-size:11px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #a9c6c9;
+            border-collapse: collapse;
+        }
+        table.altrowstable th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+            color: brown;
+            font-size: large;
+        }
+        table.altrowstable td {
+            width: 200px;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+            font-family:'Courier New', Courier, monospace;
+            font-size:large;
+        }
+        .oddrowcolor{
+            background-color:#d4e3e5;
+        }
+        .evenrowcolor{
+            background-color:#c3dde0;
+        }
+        #buttonStyle{
+            width: 100px;
+            height: 30px;
+        }
+       
+        
+        
+    </style>
+    
+
+<script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div id="input">
+            <input type="text" placeholder="Input Name" id="inputName" class="inputStyle" v-model="mname">
+            <input type="text" placeholder="Input Age" id="inputAge" class="inputStyle" v-model="mage">
+            <button id="buttonStyle" @click="addItem()">Click</button>
+
+        </div>
+
+
+        <div id="main">
+            <table class="altrowstable" id="alternatecolor">
+                
+                <tr>
+                    <th>ID</th><th>Name</th><th>Age</th>
+                </tr>
+                <tr v-for="(person,index) of persons" :key="index">
+                    <td>{{index}}</td><td>{{person.name}}</td><td>{{person.age}}</td>
+                </tr>
+            </table>
+    
+
+        </div>
+       
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+        const x =new Vue({
+           el:'#root',
+           data:{
+               persons:[
+                   {name:'ZhouHao',age:19},
+                   {name:'Linus',age:59},
+                   {name:'Bill',age:17}
+                ],
+                mname:'',
+                mage:''
+
+  
+           },
+
+           methods:{
+            addItem()
+            {
+                let mname = this.mname.trim()
+                let mage = this.mage.trim()
+                let tmp_obj = {name:mname,age:mage}
+
+
+                if (tmp_obj.name.length > 0 && !isNaN(tmp_obj.age))
+                {
+
+                    this.persons.push(tmp_obj)
+                }
+                this.mname = ''
+                this.mage = ''
+            }
+
+
+           }
+        })
+    </script>
+
+<script type="text/javascript">
+    function altRows(id){
+        if(document.getElementsByTagName){ 
+             
+            var table = document.getElementById(id); 
+            var rows = table.getElementsByTagName("tr");
+              
+            for(i = 0; i < rows.length; i++){         
+                if(i % 2 == 0){
+                    rows[i].className = "evenrowcolor";
+                }else{
+                    rows[i].className = "oddrowcolor";
+                }     
+            }
+        }
+    }
+     
+    window.onload=function(){
+        altRows('alternatecolor');
+    }
+</script>
+
+    
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>判断是否为闰年</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        body {
+            background-color: #fff;
+        }
+
+        .a {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2f3640;
+            height: 40px;
+            border-radius: 40px;
+            padding: 10px;
+        }
+
+        .a:hover .b {
+            width: 250px;
+            padding: 0 6px;
+        }
+
+        .a:hover .c {
+            background-color: wheat;
+        }
+
+        .b {
+            border: none;
+            background: none;
+            /* 取消选中搜索框时的外边框 */
+            outline: none;
+            width: 0;
+            padding: 0;
+            transition: .4s;
+            line-height: 40px;
+            font-size: 20px;
+            color: wheat;
+        }
+
+        .c {
+            color: #e94118;
+            float: right;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #2f3640;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .4s;
+        }
+
+        .result {
+            position: absolute;
+            top: 60%;
+            left: 40%;
+            background-color: #2f3640;
+            width: 250px;
+            height: 40px;
+            border-radius: 10px;
+            line-height: 40px;
+            padding-left: 10px;
+            color: aliceblue;
+            font-family: 楷体;
+            font-size: large;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="main">
+        <div class="a">
+            <input type="text" class="b" id="Input" placeholder="Please enter your Date" @keyup.Enter="CheckDate">
+            <a href="#" class="c">
+                <img src="search.png" style="width: 30px;" type="button" @click="CheckDate" >
+            </a>
+        </div>
+
+        <div class="result">
+            您输入的年份:{{end_res}}
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: '#main',
+        data: {
+
+            year: '',
+            result: ''
+        },
+        methods: {
+            CheckDate() {
+
+                var tmp = parseInt(document.getElementById("Input").value);
+                this.year = tmp;
+                if (!tmp && tmp != 0) {
+                    alert("Please enter a legal value!")
+                }
+                else {
+                    if (tmp % 4 == 0 && tmp % 100 != 0 || tmp % 400 == 0) {
+                        this.result = '是闰年'
+                    }
+                    else {
+                        this.result = '不是闰年'
+                    }
+                }
+            }
+        },
+        computed: {
+            end_res: {
+                get() {
+                    return this.year + this.result;
+                }
+
+            }
+
+        }
+
+    })
+</script>
+
+</html>
