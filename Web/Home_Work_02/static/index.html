@@ -1,480 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="js/vue.js"></script>
+		<script src="js/echarts.js"></script>
+		<link rel="stylesheet" href="./css/reset.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="js/vue.js"></script>
-    <script src="js/echarts.js"></script>
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/index.css">
-</head>
+	<body>
+		<header>
+			<div id="icon">
+				<img src="./img/logo.jpg" alt="" srcset="" />
+			</div>
 
-<body>
+			<div id="nav">
+				<ul class="nav_bar">
+					<li>
+						<a href="#">首页</a>
+					</li>
+					<li>
+						<a href="#">简介</a>
+					</li>
+					<li>
+						<a href="#">班级动态</a>
+					</li>
+					<li>
+						<a href="#">通知公告</a>
+					</li>
+					<li>
+						<a href="#">班级可视化</a>
+					</li>
+					<li>
+						<a href="#">班级成绩</a>
+					</li>
+					<li>
+						<a href="#">学生工作</a>
+					</li>
+				</ul>
+			</div>
+			<ul class="img-list">
+				<li>
+					<a href="javascript:;"><img src="./img/pic.jpg" /></a>
+				</li>
+				<li>
+					<a href="javascript:;"><img src="./img/pic.jpg" /></a>
+				</li>
+				<li>
+					<a href="javascript:;"><img src="./img/pic.jpg" /></a>
+				</li>
 
-    <header>
-        <div id="icon">
-            <img src="./img/logo.jpg" alt="" srcset="">
-        </div>
+				<div class="pointer">
+					<a class="active" href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+					<a href="javascript:;"></a>
+				</div>
+			</ul>
+		</header>
+		<!-- 最上方导航栏 -->
 
-        <div id="nav">
+		<main>
+			<div id="mid">
+				<div id="simple_intro" class="clearfix">
+					<span>班级简介:</span>
+				</div>
+				<div id="intro_list">
+					<ul>
+						<li>班级名称：{{classname}}</li>
+						<li>班主任：{{masterteaname}}</li>
+						<li>辅导员：{{tea}}</li>
+						<li>
+							班级人数：{{classnumber}}
+							<span style="color: #38a33b; font-size: smaller; margin-left: 5px"
+								>(男生：{{boynum}}人 女生：{{girlnum}}人)</span
+							>
+						</li>
+						<li>所在学院：{{colname}}</li>
+						<li>班花：{{masterstuname}}</li>
+					</ul>
+				</div>
+			</div>
+			<div id="notice_box">
+				<div id="notice" class="clearfix">通知公告</div>
+				<div class="content"></div>
+			</div>
 
-            <ul class="nav_bar">
-                <li>
-                    <a href="#">首页</a>
-                </li>
-                <li>
-                    <a href="#">简介</a>
-                </li>
-                <li>
-                    <a href="#">班级动态</a>
-                </li>
-                <li>
-                    <a href="#">通知公告</a>
-                </li>
-                <li>
-                    <a href="#">班级可视化</a>
-                </li>
-                <li>
-                    <a href="#">班级成绩</a>
-                </li>
-                <li>
-                    <a href="#">学生工作</a>
-                </li>
-            </ul>
+			<!-- 图表主体部分 -->
+			<div id="visual_chart">
+				<div id="main clearfix">
+					<!-- <div > -->
+					<div id="quote_1" class="quote">
+						<p>网安201体测可视化</p>
+					</div>
+					<div class="chart">
+						<div id="sumscore_count_chart"></div>
+						<div id="sexscore_count_chart"></div>
+					</div>
+				</div>
 
-        </div>
-        <ul class="img-list">
-            <li><a href="javascript:;"><img src="./img/pic.jpg"></a></li>
-            <li><a href="javascript:;"><img src="./img/pic.jpg"></a></li>
-            <li><a href="javascript:;"><img src="./img/pic.jpg"></a></li>
+				<div class="main_2 clearfix">
+					<div id="quote_2" class="quote">
+						<p>网安201成绩可视化</p>
+					</div>
+					<div class="chart">
+						<div id="piechart_1"></div>
+						<div id="piechart_2"></div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div id="root"></div>
+		</footer>
 
-            <div class="pointer">
-                <a class="active" href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-                <a href="javascript:;"></a>
-            </div>
-        </ul>
-    </header>
-    <!-- 最上方导航栏 -->
-   
+		<!-- 雪花效果 -->
+		<div id="snowMask"></div>
 
+		<script>
+			new Vue({
+				el: "#intro_list",
+				data: {
+					classname: "网络空间安全（201）",
+					classnumber: 38,
+					boynum: 22,
+					girlnum: 38 - 22,
+					masterteaname: "朱桂勇",
+					colname: "工学院",
+					masterstuname: "赵子辉",
+					tea: "宋梓阳",
+				},
+			});
+		</script>
 
-    <main>
-        
-        <div id="mid">
-            <div id="simple_intro" class="clearfix">
-                <span>班级简介:</span>
-            </div>
-            <div id="intro_list">
-                <ul>
-                    <li>
-                        班级名称：{{classname}}
-                    </li>
-                    <li>
-                        班主任：{{masterteaname}}
-                    </li>
-                    <li>
-                        辅导员：{{tea}}
-                    </li>
-                    <li>
-                        班级人数：{{classnumber}}
-                        <span style="color: #38a33b;font-size: smaller; margin-left: 5px;">(男生：{{boynum}}人
-                            女生：{{girlnum}}人)</span>
-                    </li>
-                    <li>
-                        所在学院：{{colname}}
-                    </li>
-                    <li>
-                        班花：{{masterstuname}}
-                    </li>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			let sumscoreChart = echarts.init(document.getElementById("sumscore_count_chart"));
+			fetch("/api/sumscore_count")
+				.then((resp) => resp.json())
+				.then((json) => {
+					let sumscoreoption = {
+						title: {
+							text: "",
+						},
+						visualMap: {
+							orient: "vertical",
+							left: "90%",
+							top: "35%",
+							min: 50,
+							max: 1800,
+							text: ["Hnum", "Lnum"],
+							// Map the score column to color
+							dimension: 1,
+							inRange: {
+								color: ["#65B581", "#FFCE34", "#FD665F"],
+							},
+						},
+						dataZoom: {
+							id: "dataZoomX",
+							type: "slider",
+							xAxisIndex: [0],
+							filterMode: "filter", // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
+							start: 0,
+							end: 100,
+						},
 
-                </ul>
+						toolbox: {
+							show: true,
+							feature: {
+								dataZoom: {
+									yAxisIndex: "none",
+								},
+								dataView: { readOnly: false },
+								magicType: { type: ["line", "bar"] },
+								restore: {},
+								saveAsImage: {},
+							},
+						},
+						tooltip: {},
+						legend: {
+							data: ["人数"],
+						},
+						xAxis: {
+							data: json.x,
+						},
+						yAxis: {},
+						series: [
+							{
+								name: "人数",
+								type: "bar",
+								data: json.y,
+							},
+						],
+					};
 
-            </div>
-            
-            
+					sumscoreChart.setOption(sumscoreoption);
+				});
+			let sexscoreChart = echarts.init(document.getElementById("sexscore_count_chart"));
+			fetch("/api/sex_score_count")
+				.then((resp) => resp.json())
+				.then((json) => {
+					let sexscoreoption = {
+						title: {
+							text: "",
+						},
 
-        </div>
-        <div id="notice_box">
-            <div id="notice" class="clearfix">
-                通知公告
-            </div>
-            <div class="content">
+						toolbox: {
+							show: true,
+							feature: {
+								dataZoom: {
+									yAxisIndex: "none",
+								},
+								dataView: { readOnly: false },
+								magicType: { type: ["line", "bar", "stack"] },
+								restore: {},
+								saveAsImage: {},
+							},
+						},
+						tooltip: {
+							trigger: "axis",
+							axisPointer: {
+								type: "shadow",
+							},
+						},
+						legend: {},
+						grid: {
+							left: "3%",
+							right: "4%",
+							bottom: "3%",
+							containLabel: true,
+						},
+						xAxis: {
+							type: "value",
+							boundaryGap: [0, 0.01],
+						},
+						yAxis: {
+							type: "category",
+							// data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
+							data: json.man_x,
+						},
+						series: [
+							{
+								name: "男",
+								type: "bar",
+								// data: [18203, 23489, 29034, 104970, 131744, 630230]
+								data: json.man_y,
+							},
+							{
+								name: "女",
+								type: "bar",
+								// data: [19325, 23438, 31000, 121594, 134141, 681807]
+								data: json.girl_y,
+							},
+						],
+					};
+					sexscoreChart.setOption(sexscoreoption);
+				});
+			let piechart_1 = echarts.init(document.getElementById("piechart_1"));
+			let piechart1_option = {
+				// backgroundColor: '#2c343c',
+				title: {
+					text: "Customized Pie",
+					left: "center",
+					top: 20,
+					textStyle: {
+						color: "#ccc",
+					},
+				},
+				tooltip: {
+					trigger: "item",
+				},
+				visualMap: {
+					show: false,
+					min: 80,
+					max: 600,
+					inRange: {
+						colorLightness: [0, 1],
+					},
+				},
+				series: [
+					{
+						name: "Access From",
+						type: "pie",
+						radius: "55%",
+						center: ["50%", "50%"],
+						data: [
+							{ value: 335, name: "Direct" },
+							{ value: 310, name: "Email" },
+							{ value: 274, name: "Union Ads" },
+							{ value: 235, name: "Video Ads" },
+							{ value: 400, name: "Search Engine" },
+						].sort(function (a, b) {
+							return a.value - b.value;
+						}),
+						roseType: "radius",
+						label: {
+							color: "rgba(239, 112, 96, 0.9)",
+						},
+						labelLine: {
+							lineStyle: {
+								color: "rgba(45, 45, 45, 1)",
+							},
+							smooth: 0.2,
+							length: 10,
+							length2: 20,
+						},
+						itemStyle: {
+							color: "#c23531",
+							shadowBlur: 200,
+							shadowColor: "rgba(0, 0, 0, 0.5)",
+						},
+						animationType: "scale",
+						animationEasing: "elasticOut",
+						animationDelay: function (idx) {
+							return Math.random() * 200;
+						},
+					},
+				],
+			};
+			piechart_1.setOption(piechart1_option);
 
-            </div>
-        </div>
+			let piechart_2 = echarts.init(document.getElementById("piechart_2"));
 
-        <!-- 图表主体部分 -->
-        <div id="visual_chart">
-            <div id="main clearfix">
-                <!-- <div > -->
-                <div id="quote_1" class="quote">
-                    <p>网安201体测可视化</p>
-                </div>
-                <div class="chart">
-                    <div id="sumscore_count_chart">
-                    </div>
-                    <div id="sexscore_count_chart">
-                    </div>
-                </div>
+			let xAxisData = [];
+			let data1 = [];
+			let data2 = [];
+			let data3 = [];
+			let data4 = [];
+			for (let i = 0; i < 10; i++) {
+				xAxisData.push("Class" + i);
+				data1.push(+(Math.random() * 2).toFixed(2));
+				data2.push(+(Math.random() * 5).toFixed(2));
+				data3.push(+(Math.random() + 0.3).toFixed(2));
+				data4.push(+Math.random().toFixed(2));
+			}
+			var emphasisStyle = {
+				itemStyle: {
+					shadowBlur: 10,
+					shadowColor: "rgba(0,0,0,0.3)",
+				},
+			};
+			let piechart2_option = {
+				legend: {
+					data: ["bar", "bar2", "bar3", "bar4"],
+					left: "10%",
+				},
+				brush: {
+					toolbox: ["rect", "polygon", "lineX", "lineY", "keep", "clear"],
+					xAxisIndex: 0,
+				},
+				toolbox: {
+					feature: {
+						magicType: {
+							type: ["stack", "line", "bar"],
+						},
+						dataView: {},
+					},
+				},
+				tooltip: {},
+				xAxis: {
+					data: xAxisData,
+					name: "X Axis",
+					axisLine: { onZero: true },
+					splitLine: { show: false },
+					splitArea: { show: false },
+				},
+				yAxis: {},
+				grid: {
+					bottom: 100,
+				},
+				series: [
+					{
+						name: "bar",
+						type: "bar",
+						stack: "one",
+						emphasis: emphasisStyle,
+						data: data1,
+					},
+					{
+						name: "bar2",
+						type: "bar",
+						stack: "one",
+						emphasis: emphasisStyle,
+						data: data2,
+					},
+					{
+						name: "bar3",
+						type: "bar",
+						stack: "two",
+						emphasis: emphasisStyle,
+						data: data3,
+					},
+					{
+						name: "bar4",
+						type: "bar",
+						stack: "two",
+						emphasis: emphasisStyle,
+						data: data4,
+					},
+				],
+			};
+			piechart_2.on("brushSelected", function (params) {
+				var brushed = [];
+				var brushComponent = params.batch[0];
+				for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
+					var rawIndices = brushComponent.selected[sIdx].dataIndex;
+					brushed.push("[Series " + sIdx + "] " + rawIndices.join(", "));
+				}
+				piechart_2.setOption({
+					title: {
+						backgroundColor: "#333",
+						text: "SELECTED DATA INDICES: \n" + brushed.join("\n"),
+						bottom: 0,
+						right: "10%",
+						width: 100,
+						textStyle: {
+							fontSize: 12,
+							color: "#fff",
+						},
+					},
+				});
+			});
 
-
-            </div>
-
-            <div class="main_2 clearfix">
-                <div id="quote_2" class="quote">
-                    <p>网安201成绩可视化</p>
-                </div>
-                <div class="chart">
-                    <div id="piechart_1"></div>
-                    <div id="piechart_2"></div>
-                </div>
-
-
-            </div>
-        </div>
-
-       
-    </main>
-    <footer>
-        <div id="root">
-    
-
-        </div>
-
-
-    </footer>
-
-
-
-    <!-- 雪花效果 -->
-    <div id="snowMask"></div>
-
-
-
-    <script>
-        new Vue({
-            el: '#intro_list',
-            data: {
-                classname: '网络空间安全（201）',
-                classnumber: 38,
-                boynum: 22,
-                girlnum: 38 - 22,
-                masterteaname: '朱桂勇',
-                colname: '工学院',
-                masterstuname: '赵子辉',
-                tea:'宋梓阳'
-
-
-            }
-        })
-
-    </script>
-
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        let sumscoreChart = echarts.init(document.getElementById('sumscore_count_chart'));
-        fetch('/api/sumscore_count')
-            .then(resp => resp.json())
-            .then(json => {
-                let sumscoreoption = {
-                    title: {
-                        text: ''
-                    },
-                    visualMap: {
-                        orient: 'vertical',
-                        left: '90%',
-                        top: '35%',
-                        min: 50,
-                        max: 1800,
-                        text: ['Hnum', 'Lnum'],
-                        // Map the score column to color
-                        dimension: 1,
-                        inRange: {
-                            color: ['#65B581', '#FFCE34', '#FD665F']
-                        }
-                    },
-                    dataZoom: {
-                        id: 'dataZoomX',
-                        type: 'slider',
-                        xAxisIndex: [0],
-                        filterMode: 'filter', // 设定为 'filter' 从而 X 的窗口变化会影响 Y 的范围。
-                        start: 0,
-                        end: 100
-                    },
-
-                    toolbox: {
-                        show: true,
-                        feature: {
-                            dataZoom: {
-                                yAxisIndex: 'none'
-                            },
-                            dataView: { readOnly: false },
-                            magicType: { type: ['line', 'bar'] },
-                            restore: {},
-                            saveAsImage: {}
-                        }
-                    },
-                    tooltip: {},
-                    legend: {
-                        data: ['人数']
-                    },
-                    xAxis: {
-                        data: json.x
-                    },
-                    yAxis: {},
-                    series: [
-                        {
-                            name: '人数',
-                            type: 'bar',
-                            data: json.y
-                        }
-                    ]
-                };
-
-                sumscoreChart.setOption(sumscoreoption);
-            })
-        let sexscoreChart = echarts.init(document.getElementById('sexscore_count_chart'));
-        fetch('/api/sex_score_count')
-            .then(resp => resp.json())
-            .then(json => {
-                let sexscoreoption = {
-                    title: {
-                        text: ''
-                    },
-
-                    toolbox: {
-                        show: true,
-                        feature: {
-                            dataZoom: {
-                                yAxisIndex: 'none'
-                            },
-                            dataView: { readOnly: false },
-                            magicType: { type: ['line', 'bar', 'stack'] },
-                            restore: {},
-                            saveAsImage: {}
-                        }
-                    },
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer: {
-                            type: 'shadow'
-                        }
-                    },
-                    legend: {},
-                    grid: {
-                        left: '3%',
-                        right: '4%',
-                        bottom: '3%',
-                        containLabel: true
-                    },
-                    xAxis: {
-                        type: 'value',
-                        boundaryGap: [0, 0.01]
-                    },
-                    yAxis: {
-                        type: 'category',
-                        // data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
-                        data: json.man_x
-                    },
-                    series: [
-                        {
-                            name: '男',
-                            type: 'bar',
-                            // data: [18203, 23489, 29034, 104970, 131744, 630230]
-                            data: json.man_y
-                        },
-                        {
-                            name: '女',
-                            type: 'bar',
-                            // data: [19325, 23438, 31000, 121594, 134141, 681807]
-                            data: json.girl_y
-                        }
-                    ]
-                };
-                sexscoreChart.setOption(sexscoreoption);
-            })
-        let piechart_1 = echarts.init(document.getElementById('piechart_1'));
-        let piechart1_option = {
-            // backgroundColor: '#2c343c',
-            title: {
-                text: 'Customized Pie',
-                left: 'center',
-                top: 20,
-                textStyle: {
-                    color: '#ccc'
-                }
-            },
-            tooltip: {
-                trigger: 'item'
-            },
-            visualMap: {
-                show: false,
-                min: 80,
-                max: 600,
-                inRange: {
-                    colorLightness: [0, 1]
-                }
-            },
-            series: [
-                {
-                    name: 'Access From',
-                    type: 'pie',
-                    radius: '55%',
-                    center: ['50%', '50%'],
-                    data: [
-                        { value: 335, name: 'Direct' },
-                        { value: 310, name: 'Email' },
-                        { value: 274, name: 'Union Ads' },
-                        { value: 235, name: 'Video Ads' },
-                        { value: 400, name: 'Search Engine' }
-                    ].sort(function (a, b) {
-                        return a.value - b.value;
-                    }),
-                    roseType: 'radius',
-                    label: {
-                        color: 'rgba(239, 112, 96, 0.9)'
-                    },
-                    labelLine: {
-                        lineStyle: {
-                            color: 'rgba(45, 45, 45, 1)'
-                        },
-                        smooth: 0.2,
-                        length: 10,
-                        length2: 20
-                    },
-                    itemStyle: {
-
-                        color: '#c23531',
-                        shadowBlur: 200,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    },
-                    animationType: 'scale',
-                    animationEasing: 'elasticOut',
-                    animationDelay: function (idx) {
-                        return Math.random() * 200;
-                    }
-                }
-            ]
-        };
-        piechart_1.setOption(piechart1_option);
-
-        let piechart_2 = echarts.init(document.getElementById('piechart_2'));
-
-        let xAxisData = [];
-        let data1 = [];
-        let data2 = [];
-        let data3 = [];
-        let data4 = [];
-        for (let i = 0; i < 10; i++) {
-            xAxisData.push('Class' + i);
-            data1.push(+(Math.random() * 2).toFixed(2));
-            data2.push(+(Math.random() * 5).toFixed(2));
-            data3.push(+(Math.random() + 0.3).toFixed(2));
-            data4.push(+Math.random().toFixed(2));
-        }
-        var emphasisStyle = {
-            itemStyle: {
-                shadowBlur: 10,
-                shadowColor: 'rgba(0,0,0,0.3)'
-            }
-        };
-        let piechart2_option = {
-            legend: {
-                data: ['bar', 'bar2', 'bar3', 'bar4'],
-                left: '10%'
-            },
-            brush: {
-                toolbox: ['rect', 'polygon', 'lineX', 'lineY', 'keep', 'clear'],
-                xAxisIndex: 0
-            },
-            toolbox: {
-                feature: {
-                    magicType: {
-                        type: ['stack', 'line', 'bar']
-                    },
-                    dataView: {}
-                }
-            },
-            tooltip: {},
-            xAxis: {
-                data: xAxisData,
-                name: 'X Axis',
-                axisLine: { onZero: true },
-                splitLine: { show: false },
-                splitArea: { show: false }
-            },
-            yAxis: {},
-            grid: {
-                bottom: 100
-            },
-            series: [
-                {
-                    name: 'bar',
-                    type: 'bar',
-                    stack: 'one',
-                    emphasis: emphasisStyle,
-                    data: data1
-                },
-                {
-                    name: 'bar2',
-                    type: 'bar',
-                    stack: 'one',
-                    emphasis: emphasisStyle,
-                    data: data2
-                },
-                {
-                    name: 'bar3',
-                    type: 'bar',
-                    stack: 'two',
-                    emphasis: emphasisStyle,
-                    data: data3
-                },
-                {
-                    name: 'bar4',
-                    type: 'bar',
-                    stack: 'two',
-                    emphasis: emphasisStyle,
-                    data: data4
-                }
-            ]
-        };
-        piechart_2.on('brushSelected', function (params) {
-            var brushed = [];
-            var brushComponent = params.batch[0];
-            for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
-                var rawIndices = brushComponent.selected[sIdx].dataIndex;
-                brushed.push('[Series ' + sIdx + '] ' + rawIndices.join(', '));
-            }
-            piechart_2.setOption({
-                title: {
-                    backgroundColor: '#333',
-                    text: 'SELECTED DATA INDICES: \n' + brushed.join('\n'),
-                    bottom: 0,
-                    right: '10%',
-                    width: 100,
-                    textStyle: {
-                        fontSize: 12,
-                        color: '#fff'
-                    }
-                }
-            });
-        });
-
-        piechart_2.setOption(piechart2_option);
-
-
-    </script>
-
-
-</body>
-
+			piechart_2.setOption(piechart2_option);
+		</script>
+	</body>
 </html>
+
